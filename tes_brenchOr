@@ -1,0 +1,78 @@
+--==========================================================
+-- Universidad Atonoma Metropolitana, Unidad Lerma
+-- Diseno Logico
+--==========================================================
+-- test_bench.vhd
+-- Programador: Xavier G.
+-- 3 de Octubre 2020
+--==========================================================
+
+-------------------------------------------------------------------------------------
+-- Library declarations
+-------------------------------------------------------------------------------------
+library ieee;
+use ieee.std_logic_1164.all;
+
+--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+--+++++++++++++++++++++++++++++++ Banco de prueba +++++++++++++++++++++++++++++++++++ 
+--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+-------------------------------------------------------------------------------------
+-- Entity declaration
+-------------------------------------------------------------------------------------
+
+entity simulation_testbench is
+--NÃ³tese cÃ³mo en una entidad de prueba (testbench) no define puertos de entrada/salida
+end simulation_testbench;
+
+architecture tb_arch of simulation_testbench is
+----------------------------------------------------------------------------------------------------
+-- Components declaration
+----------------------------------------------------------------------------------------------------
+--NÃ³tese cÃ³mo en una entidad de prueba (testbench) no define explÃ­citamente el componente a probar
+
+----------------------------------------------------------------------------------------------------
+-- Signal declaration
+----------------------------------------------------------------------------------------------------
+   signal test_in: std_logic_vector(1 downto 0);
+   signal test_out: std_logic;
+
+----------------------------------------------------------------------------------------------------
+-- Architecture body
+----------------------------------------------------------------------------------------------------
+
+begin
+   -- Instancia del circuito bajo prueba:
+   -- NÃ³tese el uso de la referencia al espacio de trabajo actual (library) como "work." y 
+   -- la especificaciÃ³n de la arquitectura del componente (my_or_arch) como parÃ¡metro
+
+   simulated_and: entity work.my_or(my_or_arch) 
+      port map (
+      x0=>test_in(0),
+      x1=>test_in(1), 
+      y=>test_out
+      );
+
+   -- Proceso para generador de vectores de prueba:
+   process
+   begin
+      -- test vector 1
+      test_in <= "00";
+      wait for 200 ns;
+      -- test vector 2
+      test_in <= "01";
+      wait for 200 ns;
+      -- test vector 3
+      test_in <= "10";
+      wait for 200 ns;
+      -- test vector 4
+      test_in <= "11";
+      wait for 200 ns;
+      -- termina la simulaciÃ³n
+      assert false
+         report "SimulaciÃ³n completa"
+       severity failure;
+   end process;
+end tb_arch;
