@@ -46,7 +46,7 @@ architecture tb_arch of simulation_testbench is
 begin
    -- Instancia del circuito bajo prueba:
    -- NÃ³tese el uso de la referencia al espacio de trabajo actual (library) como "work." y 
-   -- la especificaciÃ³n de la arquitectura del componente (my_xor_arch) como parÃ¡metro
+   -- la especificaciÃ³n de la arquitectura del componente (my_and_arch) como parÃ¡metro
 
    simulated_xor: entity work.my_xor(my_xor_arch) 
       port map (
